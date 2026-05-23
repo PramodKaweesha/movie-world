@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVIE WORLD - Sinhala Subtitles Movies & TV Shows</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+        </div>
+        <div class="loader-text">MOVIE WORLD</div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-left">
+                <span class="top-item"><i class="fas fa-envelope"></i> support@movieworld.lk</span>
+                <span class="top-item"><i class="fas fa-telegram"></i> Join Telegram</span>
+            </div>
+            <div class="top-right">
+                <a href="#" class="top-link" onclick="showPage('login')">Sign In</a>
+                <a href="#" class="top-link" onclick="showPage('login')">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header" id="siteHeader">
+        <div class="container">
+            <a href="#" class="brand" onclick="showPage('home')">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-main">MOVIE</span>
+                    <span class="brand-sub">WORLD</span>
+                </div>
+            </a>
+
+            <nav class="main-menu">
+                <a href="#" class="menu-link active" data-page="home" onclick="showPage('home')">Home</a>
+                <a href="#" class="menu-link" data-page="movies" onclick="showPage('movies')">Movies</a>
+                <a href="#" class="menu-link" data-page="tvshows" onclick="showPage('tvshows')">TV Series</a>
+                <a href="#" class="menu-link" data-page="trending" onclick="showPage('trending')">Trending</a>
+                <a href="#" class="menu-link" data-page="watchlist" onclick="showPage('watchlist')">My List</a>
+            </nav>
+
+            <div class="header-tools">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search movies...">
+                    <button class="search-icon" onclick="performSearch()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="mobile-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-content">
+            <a href="#" onclick="showPage('home'); toggleMobileMenu()">Home</a>
+            <a href="#" onclick="showPage('movies'); toggleMobileMenu()">Movies</a>
+            <a href="#" onclick="showPage('tvshows'); toggleMobileMenu()">TV Series</a>
+            <a href="#" onclick="showPage('trending'); toggleMobileMenu()">Trending</a>
+            <a href="#" onclick="showPage('watchlist'); toggleMobileMenu()">My List</a>
+            <a href="#" onclick="showPage('login'); toggleMobileMenu()">Sign In</a>
+        </div>
+    </div>
+
+    <!-- ==================== HOME PAGE ==================== -->
+    <section id="page-home" class="page active">
+        <!-- Hero Banner -->
+        <div class="hero-banner" id="heroBanner">
+            <div class="hero-image" id="heroImage"></div>
+            <div class="hero-vignette"></div>
+            <div class="container">
+                <div class="hero-inner">
+                    <div class="hero-label">
+                        <span class="label-tag">Featured</span>
+                        <span class="label-divider">|</span>
+                        <span class="label-text">Now Streaming</span>
+                    </div>
+                    <h1 class="hero-heading" id="heroHeading">The Dark Knight</h1>
+                    <div class="hero-details" id="heroDetails">
+                        <span class="detail-rating"><i class="fas fa-star"></i> 9.0</span>
+                        <span class="detail-dot">•</span>
+                        <span>2008</span>
+                        <span class="detail-dot">•</span>
+                        <span>2h 32m</span>
+                        <span class="detail-dot">•</span>
+                        <span class="detail-genre">Action, Crime, Drama</span>
+                    </div>
+                    <p class="hero-summary" id="heroSummary">When the menace known as the Joker wreaks havoc on Gotham, Batman must accept one of the greatest psychological tests of his ability to fight injustice.</p>
+                    <div class="hero-actions">
+                        <button class="btn-watch" onclick="playMovie(0)">
+                            <i class="fas fa-play"></i> Watch Now
+                        </button>
+                        <button class="btn-save" onclick="toggleWatchlist(0)">
+                            <i class="fas fa-plus"></i> Watchlist
+                        </button>
+                        <button class="btn-info" onclick="showTrailer(0)">
+                            <i class="fas fa-info-circle"></i> More Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-strip">
+            <div class="container">
+                <div class="filter-group">
+                    <button class="filter-chip active" onclick="filterHome('all', this)">All</button>
+                    <button class="filter-chip" onclick="filterHome('movie', this)">Movies</button>
+                    <button class="filter-chip" onclick="filterHome('tv', this)">TV Series</button>
+                    <button class="filter-chip" onclick="filterHome('trending', this)">Trending</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movie Grid Section -->
+        <div class="container">
+            <div class="section-title-bar">
+                <h2><i class="fas fa-fire"></i> Latest Releases</h2>
+                <a href="#" class="view-all-link" onclick="showPage('movies')">View All <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="movie-grid" id="homeGrid"></div>
+        </div>
+
+        <!-- Features Banner -->
+        <div class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-closed-captioning"></i></div>
+                        <h3>Sinhala Subtitles</h3>
+                        <p>All movies come with accurate Sinhala subtitles</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-high-definition"></i></div>
+                        <h3>HD Quality</h3>
+                        <p>BluRay, WEB-DL, WEBRip quality options</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-download"></i></div>
+                        <h3>Fast Downloads</h3>
+                        <p>Direct download links with high speed</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-mobile-screen"></i></div>
+                        <h3>Mobile Friendly</h3>
+                        <p>Watch on any device, anywhere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Movies -->
+        <div class="container">
+            <div class="section-title-bar">
+                <h2><i class="fas fa-tv"></i> TV Series</h2>
+                <a href="#" class="view-all-link" onclick="showPage('tvshows')">View All <i class="fas fa-chevron-right"></i></a>
+            </div>
+            <div class="movie-grid" id="tvGrid"></div>
+        </div>
+    </section>
+
+    <!-- ==================== MOVIES PAGE ==================== -->
+    <section id="page-movies" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>Movies</h1>
+                <p>Browse our collection of movies with Sinhala subtitles</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="filter-strip inner">
+                <div class="filter-group">
+                    <button class="filter-chip active" onclick="filterMovies('all', this)">All</button>
+                    <button class="filter-chip" onclick="filterMovies('action', this)">Action</button>
+                    <button class="filter-chip" onclick="filterMovies('horror', this)">Horror</button>
+                    <button class="filter-chip" onclick="filterMovies('comedy', this)">Comedy</button>
+                    <button class="filter-chip" onclick="filterMovies('scifi', this)">Sci-Fi</button>
+                    <button class="filter-chip" onclick="filterMovies('drama', this)">Drama</button>
+                    <button class="filter-chip" onclick="filterMovies('thriller', this)">Thriller</button>
+                </div>
+            </div>
+            <div class="movie-grid" id="moviesGrid"></div>
+        </div>
+    </section>
+
+    <!-- ==================== TV SHOWS PAGE ==================== -->
+    <section id="page-tvshows" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>TV Series</h1>
+                <p>Binge-watch the best TV shows with subtitles</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="filter-strip inner">
+                <div class="filter-group">
+                    <button class="filter-chip active" onclick="filterTVShows('all', this)">All</button>
+                    <button class="filter-chip" onclick="filterTVShows('drama', this)">Drama</button>
+                    <button class="filter-chip" onclick="filterTVShows('crime', this)">Crime</button>
+                    <button class="filter-chip" onclick="filterTVShows('thriller', this)">Thriller</button>
+                    <button class="filter-chip" onclick="filterTVShows('fantasy', this)">Fantasy</button>
+                </div>
+            </div>
+            <div class="movie-grid" id="tvshowsGrid"></div>
+        </div>
+    </section>
+
+    <!-- ==================== TRENDING PAGE ==================== -->
+    <section id="page-trending" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>Trending Now</h1>
+                <p>Most popular movies and shows this week</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="movie-grid" id="trendingGrid"></div>
+        </div>
+    </section>
+
+    <!-- ==================== WATCHLIST PAGE ==================== -->
+    <section id="page-watchlist" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>My Watchlist</h1>
+                <p>Your saved movies and TV shows</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="movie-grid" id="watchlistGrid">
+                <div class="empty-state" id="watchlistEmpty">
+                    <div class="empty-icon"><i class="fas fa-bookmark"></i></div>
+                    <h3>Your watchlist is empty</h3>
+                    <p>Click the + button on any movie to save it here</p>
+                    <button class="btn-watch" onclick="showPage('home')">Browse Movies</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LOGIN PAGE ==================== -->
+    <section id="page-login" class="page">
+        <div class="auth-bg">
+            <div class="auth-bg-overlay"></div>
+        </div>
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="auth-brand">
+                    <div class="auth-brand-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </div>
+                    <div class="auth-brand-text">
+                        <span>MOVIE</span><span class="auth-accent">WORLD</span>
+                    </div>
+                </div>
+                <h2 id="authTitle">Sign In</h2>
+                <form class="auth-form" id="authForm" onsubmit="handleAuth(event)">
+                    <div class="form-field">
+                        <label>Email</label>
+                        <input type="email" id="authEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-field">
+                        <label>Password</label>
+                        <input type="password" id="authPassword" placeholder="••••••••" required>
+                        <button type="button" class="toggle-pass" onclick="togglePassword()">
+                            <i class="fas fa-eye" id="passEye"></i>
+                        </button>
+                    </div>
+                    <div class="form-field" id="nameField" style="display:none;">
+                        <label>Full Name</label>
+                        <input type="text" id="authName" placeholder="John Doe">
+                    </div>
+                    <button type="submit" class="btn-auth" id="authSubmit">Sign In</button>
+                </form>
+                <div class="auth-options">
+                    <label class="remember-check">
+                        <input type="checkbox" checked>
+                        <span class="check-box"></span>
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="auth-forgot">Forgot password?</a>
+                </div>
+                <div class="auth-switch">
+                    <p id="authSwitch">New here? <a href="#" onclick="toggleAuthMode()">Create account</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SEARCH PAGE ==================== -->
+    <section id="page-search" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>Search Results</h1>
+                <p id="searchQuery"></p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="movie-grid" id="searchGrid">
+                <div class="empty-state" id="searchEmpty" style="display:none;">
+                    <div class="empty-icon"><i class="fas fa-search"></i></div>
+                    <h3>No results found</h3>
+                    <p>Try searching with different keywords</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WATCH PAGE ==================== -->
+    <section id="page-watch" class="page">
+        <div class="watch-page">
+            <div class="watch-nav">
+                <button class="watch-back-btn" onclick="closeWatch()">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Browse</span>
+                </button>
+            </div>
+            <div class="video-container">
+                <video id="mainVideo" controls poster="">
+                    <source src="" type="video/mp4">
+                </video>
+                <div class="video-play-overlay" id="videoPlayOverlay">
+                    <button class="overlay-play-btn" onclick="playVideo()">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="watch-meta-panel">
+                <h2 id="watchMovieTitle"></h2>
+                <div class="watch-meta-row" id="watchMetaRow"></div>
+                <p class="watch-desc" id="watchDesc"></p>
+                <div class="watch-action-row">
+                    <button class="btn-watch" onclick="toggleWatchlist(currentWatchId)">
+                        <i class="fas fa-plus"></i> Add to Watchlist
+                    </button>
+                    <button class="btn-info" onclick="showTrailer(currentWatchId)">
+                        <i class="fas fa-info-circle"></i> Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="siteFooter">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <a href="#" class="footer-brand" onclick="showPage('home')">
+                        <div class="footer-brand-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                        <div class="footer-brand-text">
+                            <span>MOVIE</span><span class="footer-accent">WORLD</span>
+                        </div>
+                    </a>
+                    <p class="footer-desc">Your ultimate destination for movies and TV shows with Sinhala subtitles. Watch anytime, anywhere.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Browse</h4>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#" onclick="showPage('movies')">Movies</a></li>
+                        <li><a href="#" onclick="showPage('tvshows')">TV Series</a></li>
+                        <li><a href="#" onclick="showPage('trending')">Trending</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Genres</h4>
+                    <ul>
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Horror</a></li>
+                        <li><a href="#">Comedy</a></li>
+                        <li><a href="#">Sci-Fi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-bar">
+                <p>&copy; 2026 MOVIE WORLD. All rights reserved. | Designed with <i class="fas fa-heart" style="color:#3b82f6;"></i> for movie lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Movie Detail Modal -->
+    <div class="detail-modal" id="detailModal">
+        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-panel">
+            <button class="modal-close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-layout">
+                <div class="modal-poster-section">
+                    <img id="modalPoster" src="" alt="">
+                    <div class="modal-poster-overlay">
+                        <button class="btn-watch" onclick="playFromModal()">
+                            <i class="fas fa-play"></i> Watch Now
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-info-section">
+                    <h2 id="modalMovieTitle"></h2>
+                    <div class="modal-meta-bar" id="modalMetaBar"></div>
+                    <p id="modalMovieDesc"></p>
+                    <div class="modal-genres" id="modalGenres"></div>
+                    <div class="modal-actions-bar">
+                        <button class="btn-watch" id="modalSaveBtn" onclick="toggleWatchlistFromModal()">
+                            <i class="fas fa-plus"></i> Add to Watchlist
+                        </button>
+                        <button class="btn-info" onclick="playFromModal()">
+                            <i class="fas fa-play"></i> Watch
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toastNotification">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
